@@ -43,7 +43,7 @@
                 </button>
             </div>
             <div class="modal-body" [hidden]="submitted">
-                <form [formGroup]="pendienteSaveForm" #pendieteUpdate (ngSubmit)="guardarPendiente(upPendiente)">
+                <form [formGroup]="pendienteSaveForm" #pendieteGuardar (ngSubmit)="guardarPendiente(pendieteGuardar)">
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Nombre:</label>
                         <input type="text" class="form-control" id="recipient-name" formControlName="nombre">
@@ -78,7 +78,7 @@
                     </button>
             </div>
             <div class="modal-body" [hidden]="submitted">
-                <form [formGroup]="pendienteUpdateForm" #pendieteUpdate (ngSubmit)="upPendiente(pendieteGuardar)">
+                <form [formGroup]="pendienteUpdateForm" #pendieteUpdate (ngSubmit)="upPendiente(pendieteUpdate)">
                     <input type="text" class="form-control" id="recipient-name" formControlName="idPendiente" [hidden]="true" [(ngModel)]="pendiente.idPendiente">
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Nombre:</label>
