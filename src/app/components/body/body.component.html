@@ -1,0 +1,98 @@
+<div class="col-2" id="nuevo">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalPendiente" data-whatever="@mdo"> <i class="fa fa-plus-circle" aria-hidden="true"></i> Nuevo pendiente</button>
+</div>
+
+<div class="col-12 table-responsive" id="table-pendientes">
+    <table class="table table-dark">
+
+        <thead>
+            <tr>
+                <th scope="col">No pendiete</th>
+                <th scope="col">Nombre </th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let pendiente of listPendientes">
+                <th>{{pendiente.idPendiente}}</th>
+                <td>{{pendiente.nombre}}</td>
+                <td>{{pendiente.descripcion}}</td>
+                <td>
+                    <button type="button" class="btn btn-primary  btn-block" (click)=" deletePendiente(pendiente.idPendiente)"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                    <button type="button" class="btn btn-secondary btn-block" data-toggle="modal" data-target="#modalPendienteUpdate" (click)="pendienteGet(pendiente)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<div id="contador">
+    <h1>Total pendientes {{contador }}</h1>
+</div>
+
+
+<div class="modal fade" id="modalPendiente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header te">
+                <h5 class="modal-title" id="exampleModalLabel">Guardar pendiente</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" [hidden]="submitted">
+                <form [formGroup]="pendienteSaveForm" #pendieteUpdate (ngSubmit)="guardarPendiente(upPendiente)">
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Nombre:</label>
+                        <input type="text" class="form-control" id="recipient-name" formControlName="nombre">
+                        <div class="alert alert-danger" *ngIf="(pendienteNombre.touched) && (pendienteNombre.invalid)" style="margin-top: 5px;">
+                            <span *ngIf="pendienteNombre.errors.required">Nombre requerido</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Descripción:</label>
+                        <textarea class="form-control" id="message-text" formControlName="descripcion"></textarea>
+                        <div class="alert alert-danger" *ngIf="(pendienteDescripcion.touched) && (pendienteDescripcion.invalid)" style="margin-top: 5px;">
+                            <span *ngIf="pendienteDescripcion.errors.required">Descripción  requerido</span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" [hidden]="(pendienteDescripcion.invalid) || (pendienteNombre.invalid)" data-dismiss="modal">Guardar</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="modalPendienteUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header te">
+                <h5 class="modal-title" id="exampleModalLabel">Actualizar pendiente</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+            </div>
+            <div class="modal-body" [hidden]="submitted">
+                <form [formGroup]="pendienteUpdateForm" #pendieteUpdate (ngSubmit)="upPendiente(pendieteGuardar)">
+                    <input type="text" class="form-control" id="recipient-name" formControlName="idPendiente" [hidden]="true" [(ngModel)]="pendiente.idPendiente">
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Nombre:</label>
+                        <input type="text" class="form-control" id="recipient-name" formControlName="nombre" [(ngModel)]="pendiente.nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Descripción:</label>
+                        <textarea class="form-control" id="message-text" formControlName="descripcion" [(ngModel)]="pendiente.descripcion"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" data-dismiss="modal">Actualizar</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
