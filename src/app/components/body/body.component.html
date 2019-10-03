@@ -42,8 +42,8 @@
                   <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body" [hidden]="submitted">
-                <form [formGroup]="pendienteSaveForm" #pendieteGuardar (ngSubmit)="guardarPendiente(pendieteGuardar)">
+            <div class="modal-body">
+                <form [formGroup]="pendienteSaveForm" #pendieteGuardar>
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Nombre:</label>
                         <input type="text" class="form-control" id="recipient-name" formControlName="nombre">
@@ -58,10 +58,9 @@
                             <span *ngIf="pendienteDescripcion.errors.required">Descripción  requerido</span>
                         </div>
                     </div>
-
-                    <button type="submit" class="btn btn-primary" [hidden]="(pendienteDescripcion.invalid) || (pendienteNombre.invalid)" data-dismiss="modal">Guardar</button>
-
                 </form>
+
+                <button type="submit" class="btn btn-primary" [hidden]="(pendienteDescripcion.invalid) || (pendienteNombre.invalid)" (click)="guardarPendiente(pendieteGuardar)" data-dismiss="modal">Guardar</button>
             </div>
         </div>
     </div>
@@ -77,8 +76,8 @@
                       <span aria-hidden="true">&times;</span>
                     </button>
             </div>
-            <div class="modal-body" [hidden]="submitted">
-                <form [formGroup]="pendienteUpdateForm" #pendieteUpdate (ngSubmit)="upPendiente(pendieteUpdate)">
+            <div class="modal-body">
+                <form [formGroup]="pendienteUpdateForm" #pendieteUpdate (ngSubmit)="upPendiente(pendieteGuardar)">
                     <input type="text" class="form-control" id="recipient-name" formControlName="idPendiente" [hidden]="true" [(ngModel)]="pendiente.idPendiente">
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Nombre:</label>
