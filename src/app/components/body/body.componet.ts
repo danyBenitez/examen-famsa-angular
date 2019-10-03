@@ -30,7 +30,7 @@ export class BodyComponent  implements OnInit{
           });
      }
 
-     pendienteGet(pendieteUpdate){
+     pendienteGet(pendieteUpdate: any){
 
           console.log(pendieteUpdate);
           this.pendiente= pendieteUpdate;
@@ -73,7 +73,7 @@ export class BodyComponent  implements OnInit{
           return this.pendienteUpdateForm.get('idPendiente');
         } 
   
-        guardarPendiente(pendieteGuardar){
+        guardarPendiente(pendieteGuardar:any){
           this.pendiente = new Pendientes();
           this.pendiente.nombre= this.pendienteNombre.value;
           this.pendiente.descripcion= this.pendienteDescripcion.value;
